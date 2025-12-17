@@ -7,7 +7,7 @@ clean = db["apartments_clean"]
 
 center = {
     "type": "Point",
-    "coordinates": [24.1052, 56.9496]
+    "coordinates": [24.6032, 56.8796] # Riga city center (longitude, latitude)
 }
 
 nearby = clean.find({
