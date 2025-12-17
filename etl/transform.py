@@ -35,7 +35,7 @@ for doc in raw.find({"op_type": "For rent", "lat": {"$ne": float("nan")}, "lon":
         lon = float(doc.get("lon"))
 
         clean.insert_one({
-            "row_id": doc.get("_id"),
+            "raw_id": doc.get("_id"),
             "price": price,
             "rooms": doc.get("rooms"),
             "area_sqm": area,

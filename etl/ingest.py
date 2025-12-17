@@ -6,8 +6,15 @@ db = client["rental_db"]
 
 raw = db["raw_listings"]
 
+# Reading CSV file
 df = pd.read_csv("../data/1/riga_re.csv")
 
+# Data exploration
+print(df.describe())
+# Printing top 5 rows
+print(df.head(10))
+
+# Data ingestion
 records = df.to_dict(orient="records")
 
 for r in records:
