@@ -7,7 +7,7 @@ clean = db["apartments_clean"]
 
 center = {
     "type": "Point",
-    "coordinates": [24.6032, 56.8796] # Riga city center (longitude, latitude)
+    "coordinates": [24.1052, 56.9496] # Riga city center (longitude, latitude)
 }
 
 nearby = clean.find({
@@ -24,4 +24,6 @@ nearby_list = list(nearby)
 print("Apartments within 3 km of Riga city center:", len(nearby_list))
 for apt in nearby_list:
     print(
-        f"ID: {apt['_id']}, Price: {apt['price']}, Area: {apt['area_sqm']} sqm, Location: {apt['location']['coordinates']}")
+        f"Price: {apt['price']}, Area: {apt['area_sqm']} sqm, Location: {apt['location']['coordinates']}")
+
+print(f"Apartments found: {len(nearby_list)}")
