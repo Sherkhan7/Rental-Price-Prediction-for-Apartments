@@ -22,9 +22,7 @@ db = client["rental_db"]
 
 raw = db["raw_listings"]
 clean = db["apartments_clean"]
-
 errors = []
-
 # Transform and clean data
 # Filter for "For rent" listings and valid lat/lon values
 for doc in raw.find({"op_type": "For rent", "lat": {"$ne": float("nan")}, "lon": {"$ne": float("nan")}}):
@@ -44,14 +42,13 @@ for doc in raw.find({"op_type": "For rent", "lat": {"$ne": float("nan")}, "lon":
                 "type": "Point",
                 "coordinates": [lon, lat]
             },
-            "price_per_sqm": price / area, # Calculate price per square meter
+            "price_per_sqm": price / area,  # Calculate price per square meter
             "created_at": datetime.now()
         })
     except Exception:
         errors.append(
             {
-                "doc_id": doc.get("_id"),
-                "error": "transformation_failed"
+                "doc_id": doc.get("_id"), "error": "transformation_failed"
             }
         )
         continue
@@ -59,4 +56,4 @@ for doc in raw.find({"op_type": "For rent", "lat": {"$ne": float("nan")}, "lon":
 print("Cleaned records:", clean.count_documents({}))
 print("Transformation errors:", len(errors))
 # Create geospatial index on location
-clean.create_index([("location", "2dsphere")])
+clean.create_index([("location", "2dsphere")]) # creating 2dsphere index for geospatial queries
